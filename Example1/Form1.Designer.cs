@@ -39,8 +39,9 @@
             this.btnMsgBox.Name = "btnMsgBox";
             this.btnMsgBox.Size = new System.Drawing.Size(143, 68);
             this.btnMsgBox.TabIndex = 0;
+            this.btnMsgBox.Text = "LoadXML";
             this.btnMsgBox.UseVisualStyleBackColor = true;
-            this.btnMsgBox.Click += new System.EventHandler(this.Button1_Click);
+            this.btnMsgBox.Click += new System.EventHandler(this.BtnMsgBox_Click);
             // 
             // button2
             // 
@@ -57,7 +58,6 @@
             this.tvLoadXML.Name = "tvLoadXML";
             this.tvLoadXML.Size = new System.Drawing.Size(555, 234);
             this.tvLoadXML.TabIndex = 2;
-            this.tvLoadXML.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvLoadXML_AfterSelect);
             // 
             // Form1
             // 

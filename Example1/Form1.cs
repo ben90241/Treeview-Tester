@@ -45,25 +45,56 @@ namespace Example1
             InitializeComponent();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hello World!", "Warning");
-        }
 
-        private void TvLoadXML_AfterSelect(object sender, TreeViewEventArgs e)
+        private void tvloadXML()
         {
             tvLoadXML.Nodes.Clear();
             tvLoadXML.Refresh();
-            XmlDocument xml_doc = new XmlDocument();
+            XmlDataDocument xml_doc = new XmlDataDocument();
             String path = Application.StartupPath;
-            xml_doc.Load(path+@"\123.xml");
-            //LinkedList<Data> list = new LinkedList<Data>();
 
-            XmlNode root = xml_doc.SelectSingleNode("Table1");
+            xml_doc.Load(path+@"\123.xml");
+            XmlNode root;
+
+            root = xml_doc.ChildNodes[0];
+            tvLoadXML.Nodes.Add(new TreeNode(xml_doc.DocumentElement.Name));
+            TreeNode node;
+            node = tvLoadXML.Nodes[0];
+
+            addNodes(root, node);
+            /*XmlNode root = xml_doc.SelectSingleNode("Table1");
             if (root != null)
             {
                 Data data = new Data();
+            }*/
+        }
+
+        void addNodes(XmlNode xNode, TreeNode tNode)
+        {
+            XmlNode x_node;
+            TreeNode t_node;
+            XmlNodeList nodeList;
+
+            if(xNode.HasChildNodes)
+            {
+                nodeList = xNode.ChildNodes;
+                for(int i=0;i<=nodeList.Count-1;i++)
+                {
+                    x_node = xNode.ChildNodes[i];
+                    tNode.Nodes.Add(new TreeNode(x_node.Name));
+                    t_node = tNode.Nodes[i];
+                    addNodes(x_node, t_node);
+                }
             }
+            else
+            {
+                tNode.Text = xNode.InnerText.ToString();
+            }
+        }
+
+        private void BtnMsgBox_Click(object sender, EventArgs e)
+        {
+            tvloadXML();
         }
     }
 }
